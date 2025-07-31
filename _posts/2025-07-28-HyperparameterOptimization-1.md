@@ -2,7 +2,7 @@
 layout: post
 title: Hyperparameter Optimization - 1
 subtitle: A Brief Introduction to HPO
-cover-img: ../assets/img/HPO/cover-background.png
+cover-img: 
 thumbnail-img: ../assets/img/HPO/cover.png
 share-img: ../assets/img/HPO/cover.png
 tags: [python, AI, model optimization]
