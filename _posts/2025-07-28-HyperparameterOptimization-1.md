@@ -2,18 +2,12 @@
 layout: post
 title: Hyperparameter Optimization - 1
 subtitle: A Brief Introduction to HPO
-cover-img: ../assets/img/2025-07-28/cover.png
+cover-img: 
 thumbnail-img: ../assets/img/2025-07-28/cover.png
 share-img: ../assets/img/2025-07-28/cover.png
 tags: [python, AI, model optimization]
 author: 吴耀廷 Yaoting Wu
 ---
-
-# Hyperparameter Optimization - 1
-
-<div style="text-align: center;">
-  <img src="../assets/img/2025-07-28/cover.png" alt="cover" title="cover" style="height: 300px; object-fit: cover;">
-</div>
 
 In machine learning, the performance of a model, like accuracy, generalization ability etc. is often affected by its **parameter settings**. For example, consider that you are building one Transformer to predict one time series data, and you may wonder how to determine some parameters like `d_models` and `n_heads`. If you make it large, the training time and cost may increase, and a risk of overfitting may exist. On the contrary, if you make it small, the accuracy may be greatly reduced. This is the topic of this article.
 
@@ -37,7 +31,6 @@ Hyperparameter Optimization (HPO) is the process of **automatically searching fo
 
 - **Goal**: To maximize a performance metric (e.g., accuracy, F1-score) or minimize a loss function on a validation dataset.
 - **Process**: It involves defining a search space of possible hyperparameter values and using a systematic method to explore this space and find the combination that yields the best result.
----
 
 ## 2. Understanding the Hyperparameter Space
 
@@ -89,7 +82,6 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 
 - **Pros**: Simple and exhaustive.
 - **Cons**: Computationally expensive; suffers from the "curse of dimensionality".
----
 
 ### 2. Random Search
 
@@ -97,7 +89,6 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 
 - **Pros**: More efficient than grid search; can explore wide space quickly.  
 - **Cons**: Still inefficient in high-dimensional spaces.
----
 
 ### 3. Bayesian Optimization (BO)
 
@@ -106,7 +97,6 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 - **Acquisition Functions**: Expected Improvement (EI), Probability of Improvement (PI), Upper Confidence Bound (UCB), etc.  
 - **Pros**: Efficient in low-dimensional hyperparameter spaces.  
 - **Cons**: Can be slow with high-dimensional or discrete spaces.
----
 
 ### 4. Hyperband
 
@@ -117,7 +107,6 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
   - Successively halves the set of configurations based on performance  
 - **Pros**: Very efficient for deep learning with early-stopping.  
 - **Cons**: Assumes that early performance correlates with final performance.
----
 
 ### 5. BOHB (Bayesian Optimization + Hyperband)
 
@@ -125,7 +114,6 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 
 - Bayesian model proposes new configurations.  
 - Hyperband allocates budgets and prunes unpromising runs.
----
 
 ### 6. Gradient-Based Optimization
 
@@ -133,7 +121,6 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 
 - **Pros**: Efficient when applicable.  
 - **Cons**: Rarely practical—most hyperparameters are non-differentiable.
----
 
 ### 7. Evolutionary Algorithms / Metaheuristics
 
@@ -142,7 +129,6 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 - **Algorithms**: Genetic Algorithms (GA), Particle Swarm Optimization (PSO), Differential Evolution (DE)  
 - **Pros**: Good for discrete, non-smooth, or noisy spaces.  
 - **Cons**: May require many function evaluations.
----
 
 ### 8. Reinforcement Learning-based Methods
 
@@ -150,7 +136,6 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 
 - **Pros**: Can explore complex, structured search spaces.  
 - **Cons**: Extremely resource-intensive.
----
 
 ## 4. Conclusion
 
