@@ -166,6 +166,8 @@ As models become more complex, intelligent HPO techniques are no longer a luxury
 | Gradient-based     | Differentiable hyperparams| Special use-cases     | ✅ High         |
 | RL-based (NAS)     | Policy search             | Architecture search   | ✅❌ Very High   |
 
+<br><br>
+
 > References:
 > 1. https://www.blog.trainindata.com/hyperparameters-in-machine-learning/
 > 2. https://blog.csdn.net/Lvbaby_/article/details/131591573?spm=1001.2014.3001.5502
