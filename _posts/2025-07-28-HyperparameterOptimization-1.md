@@ -5,15 +5,15 @@ subtitle: A Brief Introduction to HPO
 cover-img: 
 thumbnail-img: ../assets/img/HPO/cover.png
 share-img: ../assets/img/HPO/cover.png
-tags: [python, AI, model optimization]
+tags: [python, Artificial Intelligence, model optimization]
 author: 吴耀廷 Yaoting Wu
 ---
 
 In machine learning, the performance of a model, like accuracy, generalization ability etc. is often affected by its **parameter settings**. For example, consider that you are building one Transformer to predict one time series data, and you may wonder how to determine some parameters like `d_models` and `n_heads`. If you make it large, the training time and cost may increase, and a risk of overfitting may exist. On the contrary, if you make it small, the accuracy may be greatly reduced. This is the topic of this article.
 
-## 1. Understanding Parameters and Hyperparameters
+# 1. Understanding Parameters and Hyperparameters
 
-### 1.1. Parameters and Hyperparameters
+## 1.1. Parameters and Hyperparameters
 
 In any machine learning model, there are two distinct kinds of parameters:
 
@@ -23,16 +23,20 @@ In any machine learning model, there are two distinct kinds of parameters:
 2.  **Hyperparameters**: These are external configuration settings for the model and the training algorithm. They are **set by the practitioner *before* training begins**. They control the overall behavior, structure, and performance of the model.
     -   **Examples**: The learning rate, the number of layers in a deep neural network, the `d_model` (embedding dimension) and `n_heads` (number of attention heads) in a Transformer.
 
+<p align="center">
+  <img src="../assets/img/HPO/hp_vs_p.avif" alt="hp_vs_p" title="hp_vs_p" height="300">
+</p>
+
 The core challenge is that there's no magic formula to determine the best hyperparameters. Their optimal values depend on the specific dataset and task. This is why we need **Hyperparameter Optimization (HPO)**.
 
-### 1.2. What is Hyperparameter Optimization?
+## 1.2. What is Hyperparameter Optimization?
 
 Hyperparameter Optimization (HPO) is the process of **automatically searching for the optimal set of hyperparameters** for a machine learning model to achieve the best performance on a given task.
 
 - **Goal**: To maximize a performance metric (e.g., accuracy, F1-score) or minimize a loss function on a validation dataset.
 - **Process**: It involves defining a search space of possible hyperparameter values and using a systematic method to explore this space and find the combination that yields the best result.
 
-## 2. Understanding the Hyperparameter Space
+# 2. Understanding the Hyperparameter Space
 
 The **Hyperparameter Space** (or Search Space) is the set of all possible hyperparameter combinations that we want to explore. Defining this space is the first step in any HPO task. A well-defined space is crucial for finding the best model efficiently.
 
@@ -49,7 +53,7 @@ The space is defined by its:
     -   The space isn't always a simple grid. Some hyperparameters can be **conditional**. For example, the hyperparameters for an Adam optimizer (like `beta1`, `beta2`) are only relevant if you choose `'Adam'` as your `optimizer_type`.
     -   There can also be **constraints**. For instance, in a Transformer, `d_model` must be divisible by `n_heads`.
 
-### Example: Defining a Search Space for a Transformer
+## Example: Defining a Search Space for a Transformer
 
 Let's imagine we are tuning a Transformer model. Our search space might look like this:
 
@@ -66,7 +70,7 @@ Let's imagine we are tuning a Transformer model. Our search space might look lik
 
 The goal of HPO is to navigate this multi-dimensional, complex space to find the point that corresponds to the best-performing model.
 
-## 3. Common Hyperparameter Optimization Methods
+# 3. Common Hyperparameter Optimization Methods
 
 | Category                     | Methods                                          |
 |------------------------------|--------------------------------------------------|
@@ -76,21 +80,21 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 | **Evolutionary / Metaheuristics** | Genetic Algorithms, Particle Swarm Optimization |
 | **Ensemble / Hybrid**        | BOHB (Bayesian + Hyperband), Optuna, SMAC        |
 
-### 1. Grid Search
+## 3.1. Grid Search
 
 **Idea**: Try all possible combinations in a discrete grid of hyperparameters.
 
 - **Pros**: Simple and exhaustive.
 - **Cons**: Computationally expensive; suffers from the "curse of dimensionality".
 
-### 2. Random Search
+## 3.2. Random Search
 
 **Idea**: Randomly sample combinations of hyperparameters.
 
 - **Pros**: More efficient than grid search; can explore wide space quickly.  
 - **Cons**: Still inefficient in high-dimensional spaces.
 
-### 3. Bayesian Optimization (BO)
+## 3.3. Bayesian Optimization (BO)
 
 **Idea**: Build a probabilistic surrogate model (e.g., Gaussian Process, Tree Parzen Estimator) to model the objective function, and use it to select promising configurations.
 
@@ -98,7 +102,7 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 - **Pros**: Efficient in low-dimensional hyperparameter spaces.  
 - **Cons**: Can be slow with high-dimensional or discrete spaces.
 
-### 4. Hyperband
+## 3.4. Hyperband
 
 **Idea**: Allocate resources (e.g., training epochs) adaptively using *Successive Halving*, evaluating many configurations with small budgets and keeping only the top performers.
 
@@ -108,21 +112,21 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 - **Pros**: Very efficient for deep learning with early-stopping.  
 - **Cons**: Assumes that early performance correlates with final performance.
 
-### 5. BOHB (Bayesian Optimization + Hyperband)
+## 3.5. BOHB (Bayesian Optimization + Hyperband)
 
 **Idea**: Combines Bayesian Optimization’s smart sampling with Hyperband’s resource allocation.
 
 - Bayesian model proposes new configurations.  
 - Hyperband allocates budgets and prunes unpromising runs.
 
-### 6. Gradient-Based Optimization
+## 3.6. Gradient-Based Optimization
 
 **Idea**: When the validation metric is differentiable w.r.t. hyperparameters, use gradient descent to update them directly.
 
 - **Pros**: Efficient when applicable.  
 - **Cons**: Rarely practical—most hyperparameters are non-differentiable.
 
-### 7. Evolutionary Algorithms / Metaheuristics
+## 3.7. Evolutionary Algorithms / Metaheuristics
 
 **Idea**: Use biologically inspired operations—mutation, crossover, and selection—to evolve populations of hyperparameter sets.
 
@@ -130,14 +134,14 @@ The goal of HPO is to navigate this multi-dimensional, complex space to find the
 - **Pros**: Good for discrete, non-smooth, or noisy spaces.  
 - **Cons**: May require many function evaluations.
 
-### 8. Reinforcement Learning-based Methods
+## 3.8. Reinforcement Learning-based Methods
 
 **Idea**: Train an RL agent to generate hyperparameter configurations, often used in Neural Architecture Search (NAS).
 
 - **Pros**: Can explore complex, structured search spaces.  
 - **Cons**: Extremely resource-intensive.
 
-## 4. Conclusion
+# 4. Conclusion
 
 Hyperparameter optimization is a critical step in building high-performance machine learning models. While manual tuning can be intuitive, it is often time-consuming and suboptimal. Automated HPO methods provide a systematic way to navigate the complex hyperparameter space and discover configurations that unlock a model's true potential.
 
@@ -149,7 +153,7 @@ This article has provided an overview of the landscape of HPO, from simple metho
 
 As models become more complex, intelligent HPO techniques are no longer a luxury but a necessity. By leveraging these methods, practitioners can save valuable time, improve model performance, and gain deeper insights into their models' behavior. In the next part of this series, we will dive into a practical example, using a popular library to optimize a real-world model.
 
-### Summary Table
+## Summary Table
 
 | Method             | Search Type               | Suitable For          | Efficiency      |
 |--------------------|---------------------------|-----------------------|-----------------|
@@ -161,3 +165,7 @@ As models become more complex, intelligent HPO techniques are no longer a luxury
 | Evolutionary (GA)  | Population-based          | Non-smooth spaces     | ✅ Medium       |
 | Gradient-based     | Differentiable hyperparams| Special use-cases     | ✅ High         |
 | RL-based (NAS)     | Policy search             | Architecture search   | ✅❌ Very High   |
+
+> References:
+> 1. https://www.blog.trainindata.com/hyperparameters-in-machine-learning/
+> 2. https://blog.csdn.net/Lvbaby_/article/details/131591573?spm=1001.2014.3001.5502
